@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 from cache import cache_memory
@@ -12,7 +13,7 @@ def compare_sampling():
   y_test_1000 = np.array(test_1000["labels"])
   acc_1000 = []
   for desc in descriptors:
-    knn = KNeighborsClassifier(n_neighbors=5)
+    knn = KNeighborsClassifier(n_neighbors=5, metric='euclidean')
     knn.fit(np.array(train_1000[desc]), y_train_1000)
     y_pred = knn.predict(np.array(test_1000[desc]))
     score = accuracy_score(y_test_1000, y_pred) * 100
@@ -23,7 +24,7 @@ def compare_sampling():
   y_test_2048 = np.array(test_2048["labels"])
   acc_2048 = []
   for desc in descriptors:
-    knn = KNeighborsClassifier(n_neighbors=5)
+    knn = KNeighborsClassifier(n_neighbors=5, metric='euclidean')
     knn.fit(np.array(train_2048[desc]), y_train_2048)
     y_pred = knn.predict(np.array(test_2048[desc]))
     score = accuracy_score(y_test_2048, y_pred) * 100
@@ -37,6 +38,7 @@ def compare_sampling():
   plt.title("Porównanie dokładności próbek: 1000 vs 2048 punktów")
   plt.legend()
   plt.grid()
+  Path("results").mkdir(exist_ok=True)
   plt.savefig("results/sampling_1000vs2048.png")
   plt.close()
 

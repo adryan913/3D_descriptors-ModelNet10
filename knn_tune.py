@@ -32,7 +32,7 @@ def knn_tune():
         accuracies = []
 
         for k in k_val:
-            knn = KNeighborsClassifier(n_neighbors=k)
+            knn = KNeighborsClassifier(n_neighbors=k, metric='euclidean')
             knn.fit(x_train, y_train)
             y_pred = knn.predict(x_test)
             acc = accuracy_score(y_test, y_pred) * 100

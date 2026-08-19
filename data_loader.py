@@ -62,7 +62,7 @@ def save_point_cloud_capture(pcd, output_filename="capture.png", output_dir="cap
 
 # --- TEST DZIAŁANIA ---
 if __name__ == "__main__":
-    test_file = "ModelNet10/monitor/train/monitor_0003.off"
+    test_file = "ModelNet10/monitor/train/monitor_0005.off"
 
     if os.path.exists(test_file):
         print(f"Wczytywanie i przetwarzanie pliku: {test_file}...")
@@ -75,7 +75,7 @@ if __name__ == "__main__":
         print(f"Maksymalna odległość od środka (max r <= 1.0): {np.max(np.sqrt(np.sum(pts ** 2, axis=1))):.4f}")
 
         # Zapisanie zrzutu ekranu w folderze captures/
-        save_point_cloud_capture(pcd, output_filename="capture_monitor_0003.png", output_dir="captures")
+        save_point_cloud_capture(pcd, output_filename="capture_monitor_0005.png", output_dir="captures")
 
         # Otwarcie okienka wizualizacji 3D
         print("\nOtwieranie okna z wizualizacją 3D... (Zamknij okno, aby zakończyć test)")

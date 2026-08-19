@@ -116,7 +116,7 @@ if __name__ == "__main__":
     y_train = np.array(train_data['labels'])
     y_test = np.array(test_data['labels'])
 
-    # 2. Ewaluacja każdego deskryptora osobno
+    # Ewaluacja każdego deskryptora osobno
     descriptors = ['PCA', 'D2', 'FPFH']
 
     for desc_name in descriptors:
