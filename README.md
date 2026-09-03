@@ -42,7 +42,7 @@ Pobierz zbiór [ModelNet10](https://modelnet.cs.princeton.edu/) i umieść rozpa
 * Trening modelu PointNet: `python pointnet.py`
 * Interaktywna predykcja: `python predicter.py`
 
-## 📈 Wyniki (Benchmark)
+## Wyniki (Benchmark)
 
 Eksperymenty przeprowadzono na zbiorze testowym ModelNet10. Wyniki obrazują przeskok jakościowy od prostych deskryptorów globalnych do zaawansowanych sieci głębokich.
 
