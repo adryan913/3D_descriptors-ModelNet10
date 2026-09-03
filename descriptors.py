@@ -2,9 +2,6 @@ import numpy as np
 import open3d as o3d
 
 
-# ==========================================
-# 1. DESKRYPTOR CECH WŁASNYCH PCA
-# ==========================================
 def deskryptor_pca(pcd):
     """
     Wyznacza macierz kowariancji, wartości własne (lambda_1 >= lambda_2 >= lambda_3)
@@ -36,9 +33,6 @@ def deskryptor_pca(pcd):
     return np.array([linearness, planarity, sphericity], dtype=float)
 
 
-# ==========================================
-# 2. DESKRYPTOR D2 (SHAPE DISTRIBUTION D2)
-# ==========================================
 def deskryptor_d2(pcd, num_pairs=10000, num_bins=30):
     """
     Losuje N par punktów, mierzy ich odległości euklidesowe
@@ -60,9 +54,6 @@ def deskryptor_d2(pcd, num_pairs=10000, num_bins=30):
     return hist
 
 
-# ==========================================
-# 3. DESKRYPTOR FPFH (OPEN3D)
-# ==========================================
 def deskryptor_fpfh(pcd, k_neighbors=30):
     """
     Estymuje wektory normalne dla K sąsiadów, a następnie wylicza
@@ -89,13 +80,9 @@ if __name__ == "__main__":
     test_file = "ModelNet10/chair/train/chair_0001.off"
     pcd = load_and_sample_off(test_file, num_points=1000)
 
-    print("--- TEST DESKRYPTORÓW ---")
-
     pca_feat = deskryptor_pca(pcd)
     print(f"1. PCA (3 cechy float): {pca_feat}")
-
     d2_feat = deskryptor_d2(pcd)
     print(f"2. D2 (histogram):   długość = {len(d2_feat)}, suma = {np.sum(d2_feat):.2f}")
-
     fpfh_feat = deskryptor_fpfh(pcd)
     print(f"3. FPFH (histogram): długość = {len(fpfh_feat)}")

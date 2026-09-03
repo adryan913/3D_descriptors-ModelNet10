@@ -4,13 +4,12 @@ CACHE_DIR = Path("cache")
 
 def cache_memory(load_data_fn, dataset_path="ModelNet10", num_points=1000):
   """Sprawdza, czy wyliczone cechy znajdują się już w plikach pamięci podręcznej (.npy).
-
   Jeśli istnieją -> wczytuje je w ułamku sekundy.
   Jeśli nie -> wykonuje ekstrakcję cech i zapisuje je na przyszłość.
   """
   CACHE_DIR.mkdir(exist_ok=True)
 
-  # 2. Połączono przypisanie listy
+  # Połączono przypisanie listy
   files_to_check = [
       CACHE_DIR / f"train_pca_{num_points}p.npy",
       CACHE_DIR / f"train_d2_{num_points}p.npy",
@@ -48,13 +47,9 @@ def cache_memory(load_data_fn, dataset_path="ModelNet10", num_points=1000):
     print("Załadowano dane z plików .npy\n")
     return train_data, test_data, categories
 
-  # 3. Kod poniżej wykonuje się TYLKO WTEDY, gdy brak chociaż jednego pliku .npy
-  print(
-      f"Brak pamięci dla N={num_points}. Trwa pierwsza ekstrakcja"
-  )
-  train_data, test_data, categories = load_data_fn(
-      dataset_path, num_points=num_points
-  )
+  # Kod poniżej wykonuje się TYLKO WTEDY, gdy brak chociaż jednego pliku .npy
+  print(f"Brak pamięci dla N={num_points}. Trwa pierwsza ekstrakcja")
+  train_data, test_data, categories = load_data_fn(dataset_path, num_points=num_points)
 
   # Zapisujemy każdy deskryptor do osobnego pliku .npy
   print("Zapisywanie deskryptorów do plików .npy")

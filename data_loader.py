@@ -14,11 +14,11 @@ def preprocess_point_cloud(pcd):
     # Konwersja wektora punktów Open3D na tablicę NumPy (jako widok danych, bez zbędnej kopii w pamięci)
     points = np.asarray(pcd.points)
 
-    # 1. Wycentrowanie w [0,0,0]
+    # Wycentrowanie w [0,0,0]
     center = np.mean(points, axis=0)
     points_centered = points - center
 
-    # 2. Skalowanie (promień sfery jednostkowej = 1)
+    # Skalowanie (promień sfery jednostkowej = 1)
     max_distance = np.max(np.sqrt(np.sum(points_centered ** 2, axis=1)))
     points_normalized = points_centered / max_distance
 
@@ -59,10 +59,8 @@ def save_point_cloud_capture(pcd, output_filename="capture.png", output_dir="cap
 
     print(f" Zapisano zrzut ekranu w: {full_save_path}")
 
-
-# --- TEST DZIAŁANIA ---
 if __name__ == "__main__":
-    test_file = "ModelNet10/monitor/train/monitor_0005.off"
+    test_file = "ModelNet10/sofa/train/sofa_0007.off"
 
     if os.path.exists(test_file):
         print(f"Wczytywanie i przetwarzanie pliku: {test_file}...")
@@ -78,7 +76,6 @@ if __name__ == "__main__":
         save_point_cloud_capture(pcd, output_filename="capture_monitor_0005.png", output_dir="captures")
 
         # Otwarcie okienka wizualizacji 3D
-        print("\nOtwieranie okna z wizualizacją 3D... (Zamknij okno, aby zakończyć test)")
         o3d.visualization.draw_geometries([pcd], window_name="Sprobkowana i wycentrowana chmura 3D")
     else:
         print(f"Nie znaleziono pliku testowego: {test_file}")

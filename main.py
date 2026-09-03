@@ -7,7 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from data_loader import load_and_sample_off
 from descriptors import deskryptor_pca, deskryptor_d2, deskryptor_fpfh
-
+from cache import cache_memory
 
 
 def load_dataset_and_extract_features(dataset_path="ModelNet10", num_points=1000):
@@ -63,9 +63,7 @@ def evaluate_and_plot(X_train, X_test, y_train, y_test, descriptor_name, categor
     """
     Trenuje k-NN, oblicza Accuracy, drukuje raport i zapisuje Macierz Pomyłek do pliku PNG.
     """
-    print(f"\n==========================================")
-    print(f" EVALUATION: {descriptor_name} (k-NN, k={k_neighbors})")
-    print(f"==========================================")
+    print(f" DESKRYPTOR: {descriptor_name} (k-NN, k={k_neighbors})")
 
     # Inicjalizacja i trening klasyfikatora k-NN z metryką euklidesową
     knn = KNeighborsClassifier(n_neighbors=k_neighbors, metric='euclidean')
@@ -76,7 +74,7 @@ def evaluate_and_plot(X_train, X_test, y_train, y_test, descriptor_name, categor
 
     # Wyliczenie dokładności (Accuracy)
     acc = accuracy_score(y_test, y_pred)
-    print(f" Dokładność (Accuracy) [{descriptor_name}]: {acc * 100:.2f}%\n")
+    print(f" Dokładność [{descriptor_name}]: {acc * 100:.2f}%\n")
     print("Raport klasyfikacji:")
     print(classification_report(y_test, y_pred))
 
@@ -87,7 +85,7 @@ def evaluate_and_plot(X_train, X_test, y_train, y_test, descriptor_name, categor
     plt.figure(figsize=(10, 8))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                 xticklabels=categories, yticklabels=categories)
-    plt.title(f'Macierz pomyłek - {descriptor_name} (Accuracy: {acc * 100:.2f}%)')
+    plt.title(f'Macierz pomyłek - {descriptor_name} (Dokładność: {acc * 100:.2f}%)')
     plt.xlabel('Przewidywana kategoria (Predicted)')
     plt.ylabel('Prawdziwa kategoria (True)')
     plt.tight_layout()
@@ -105,14 +103,18 @@ if __name__ == "__main__":
 
     print("Rozpoczynanie pełnego potoku klasyfikacji 3D...")
 
-    # 1. Ekstrakcja cech z całej bazy
-    train_data, test_data, categories = load_dataset_and_extract_features(DATASET_PATH, num_points=1000)
+    # Wczytanie z pamięci cache:
+    train_data, test_data, categories = cache_memory(
+        load_dataset_and_extract_features,
+        dataset_path=DATASET_PATH,
+        num_points=1000
+    )
 
     # Konwersja na tablice NumPy
     y_train = np.array(train_data['labels'])
     y_test = np.array(test_data['labels'])
 
-    # 2. Ewaluacja każdego deskryptora osobno
+    # Ewaluacja każdego deskryptora osobno
     descriptors = ['PCA', 'D2', 'FPFH']
 
     for desc_name in descriptors:

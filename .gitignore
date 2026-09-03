@@ -1,4 +1,22 @@
+# IDE
 .idea/
+.vscode/
+
+# Python cache i wirtualne środowiska
 __pycache__/
 *.pyc
+*.pyo
+venv/
+env/
+.venv/
+
+# Bazy danych i pamięć podręczna
+ModelNet10/
+cache/
+cache_raw/
 *.npy
+
+# Pliki tymczasowe Office
+~$*.doc
+~$*.docx
+~$*.rtf
