@@ -2,8 +2,7 @@
 
 Repozytorium zawiera kompleksowy projekt badawczy skupiający się na przetwarzaniu i klasyfikacji chmur punktów 3D z wykorzystaniem zbioru **ModelNet10**. Projekt zestawia klasyczne deskryptory geometryczne z nowoczesnymi architekturami głębokiego uczenia.
 
-Projekt został zrealizowany w ramach akademickich praktyk badawczych w Instytucie Telekomunikacji Multimedialnej Politechniki Poznańskiej. Obejmuje budowę pełnego potoku uczenia maszynowego.
-
+Projekt został zrealizowany w ramach akademickich praktyk badawczych w Instytucie Telekomunikacji Multimedialnej Politechniki Poznańskiej.
 ## Przegląd Projektu
 
 Głównym celem projektu jest ewaluacja i porównanie różnych podejść do rozpoznawania obiektów 3D:
@@ -28,7 +27,7 @@ Głównym celem projektu jest ewaluacja i porównanie różnych podejść do roz
 
 **1. Klonowanie repozytorium i instalacja zależności:**
 ```bash
-git clone [https://github.com/adryan913/3D_descriptors-ModelNet10.git](https://github.com/adryan913/3D_descriptors-ModelNet10.git)
+git clone https://github.com/adryan913/3D_descriptors-ModelNet10.git
 cd 3D_descriptors-ModelNet10
 pip install -r requirements.txt
 ```
